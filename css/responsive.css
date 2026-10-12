@@ -1,0 +1,152 @@
+/* EthicsCodex: responsive rules for large screens, laptops, tablets and phones, plus reduced-motion support.
+   Breakpoints: 1500+ (wide) | 1100 | 900 (tablet) | 640 (phone, menu becomes a button) | 400 (small phone) */
+
+/* ---------- Base safety for every screen ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  overflow-x: clip;            /* nothing may cause sideways scrolling */
+  overflow-wrap: break-word;
+}
+img, svg, canvas, video {
+  max-width: 100%;
+}
+.nav {
+  padding-left: max(5vw, env(safe-area-inset-left));
+  padding-right: max(5vw, env(safe-area-inset-right));
+}
+#toTop {
+  right: max(1.2rem, env(safe-area-inset-right));
+  bottom: max(1.2rem, env(safe-area-inset-bottom));
+}
+dialog {
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+}
+#lb img {
+  max-height: 70vh;
+  max-height: 70dvh;
+}
+.hero-text {
+  text-shadow: 0 1px 10px rgba(0, 20, 80, .45);   /* keeps text readable over the word cloud */
+}
+
+/* Touch screens: no sticky hover "jumps" */
+@media (hover: none) {
+  .topic:hover, .btn:hover { transform: none; }
+  .topic:hover { box-shadow: none; }
+}
+
+/* ---------- Wide screens ---------- */
+@media (min-width: 1500px) {
+  .sec > *, .banner { max-width: 1240px; }
+  .hero { padding-left: calc((100vw - 1240px) / 2); padding-right: calc((100vw - 1240px) / 2); }
+}
+
+/* ---------- Laptops / small desktops ---------- */
+@media (max-width: 1100px) {
+  nav { gap: .8rem; }
+  nav a { font-size: .85rem; }
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    background: var(--blue);
+    padding: 4.5rem 6vw;
+  }
+  .hero-art { max-width: 420px; margin: 0 auto; width: 100%; }
+  .three, .four { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats div:nth-child(2n) { border-right: 0; }
+  .stats div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .sec { padding: 3.5rem 5vw; }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  /* Menu: shown as a Menu button on phones only, like the original */
+  .burger { display: block; }
+  nav {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+    padding: .6rem 0 .8rem;
+    max-height: 75vh;
+    max-height: 75dvh;
+    overflow-y: auto;
+  }
+  nav.open { display: flex; }
+  nav a, nav .theme { font-size: 1rem; padding: .6rem 0; width: 100%; text-align: left; }
+  nav .cta { width: auto; padding: .55rem 1rem; margin: .4rem 0; }
+  nav .theme { width: auto; padding: .5rem .9rem; margin: .3rem 0; }
+  body { font-size: 1rem; line-height: 1.6; }
+  .two, .three, .four { grid-template-columns: 1fr; }
+  .sec { padding: 2.6rem 5vw; }
+  .hero { padding: 2.6rem 5vw; gap: 1.4rem; }
+  .hero-art { max-width: 300px; }
+  .lead { font-size: 1.05rem; }
+  .btn { padding: .8rem 1.2rem; }              /* comfortable touch target */
+  h2 { padding-left: .6rem; border-left-width: 5px; }
+  h3 { margin-top: 1.4rem; }
+
+  .stats b { font-size: 2rem; }
+  .stats div { padding: 1.1rem .6rem; }
+
+  .banner { height: 120px; margin-bottom: 1.4rem; padding: .9rem 1rem; }
+  .banner svg { width: 64px; height: 64px; top: 18px; right: 28px; }
+  .banner p { font-size: .95rem; max-width: 22ch; }
+
+  .tabs { gap: .35rem; }
+  .tabs button { flex: 1; padding: .6rem .5rem; font-size: .95rem; }
+  .tabpanel { padding: 1rem; }
+
+  .acc details { padding: .1rem .9rem; }
+  .acc summary { gap: .8rem; }
+
+  .quiz { padding: 1.1rem; }
+  .qhead { gap: .6rem; font-size: .9rem; }
+  .opts button { min-height: 48px; padding: .75rem .9rem; }
+  .score { font-size: 2.2rem; }
+
+  .nextnav { flex-direction: column; gap: .6rem; }
+  .nextnav a { padding: .4rem 0; }
+
+  /* Gallery stays 2 across so it is not a very long scroll */
+  #gallery .grid.four { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+  .fig img { height: 120px; }
+  .fig figcaption { padding: .6rem .7rem; font-size: .8rem; }
+  .cimg { max-height: 240px; }
+
+  .flinks { gap: .8rem 1.1rem; }
+  footer { padding: 1.2rem 5vw; }
+}
+
+/* ---------- Small phones (320 to 400 px) ---------- */
+@media (max-width: 400px) {
+  #gallery .grid.four { grid-template-columns: 1fr; }
+  .fig img { height: 160px; }
+  .brand { font-size: 1.15rem; }
+  .btn { width: 100%; text-align: center; margin-right: 0; }
+}
+
+/* ---------- Landscape phones: keep the hero from filling the whole screen ---------- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero { padding-top: 2rem; padding-bottom: 2rem; }
+  nav { max-height: 60vh; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
